@@ -1,0 +1,22 @@
+@startuml
+!include_once model.pu!user
+!include_once model.pu!item
+!include_once model.pu!company
+!include_once model.pu!front
+!include_once model.pu!stock
+
+ユーザー -- ユーザー配達先
+ユーザー -- ユーザークレジットカード
+購入 -- 購入明細
+購入 -- ユーザー
+購入明細 -- 商品マスタ
+在庫 -- 出庫
+購入 -- 出庫
+出庫 -- 商品マスタ
+購入 -- 出荷
+出荷 -- 出荷明細
+出荷 -- 社員マスタ
+出荷明細 -- 商品マスタ
+購入 -- 入金
+商品マスタ -- 商品カテゴリマスタ
+@enduml

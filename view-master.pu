@@ -1,0 +1,21 @@
+@startuml
+!include_once model.pu!user
+!include_once model.pu!item
+
+skinparam class {
+    backgroundColor<< トランザクション >> LightPink
+    backgroundColor<< ステート >> LightYellow
+    backgroundColor<< マスタ >> LightGreen
+}
+
+class ユーザー <<ステート>>
+class ユーザー配達先 <<ステート>>
+class ユーザークレジットカード <<ステート>>
+class 商品カテゴリマスタ <<マスタ>>
+class 商品マスタ <<マスタ>>
+
+ユーザー "1" *-down- "0..n" ユーザー配達先
+ユーザー "1" *-down- "0..n" ユーザークレジットカード
+商品カテゴリマスタ "1" *-down- "0..n" 商品マスタ
+
+@enduml

@@ -1,0 +1,125 @@
+@startuml(id=user)
+class ユーザー {
+    ユーザーID
+    名前
+    郵便番号
+    住所
+    電話番号
+    メールアドレス
+}
+
+class ユーザー配達先 {
+    ユーザーID
+    ユーザー配達先ID
+    郵便番号
+    住所
+    電話番号
+    優先順位
+}
+
+class ユーザークレジットカード {
+    ユーザーID
+    ユーザークレジットカードID
+    決済代行ID
+    カード番号下四桁
+    有効期限
+    カード名
+}
+@enduml
+
+@startuml(id=item)
+class 商品カテゴリマスタ {
+    商品カテゴリID
+    カテゴリ名
+}
+
+class 商品マスタ {
+    商品ID
+    商品名
+    単価
+    税種別
+    商品カテゴリID
+}
+@enduml
+
+@startuml(id=company)
+class 社員マスタ {
+    社員ID
+    社員名
+}
+
+@enduml
+
+@startuml(id=front)
+
+class 購入 {
+    購入ID
+    購入日時
+    ユーザーID
+    配達先郵便番号
+    配達先住所
+    配達先宛名
+    決済代行ID
+    税率
+    値引額
+    値引率
+    小計
+    出庫ステータス
+    入金ステータス
+    出荷ステータス
+}
+
+class 購入明細 {
+    購入ID
+    購入明細ID
+    商品ID
+    数量
+    単価
+    税率
+    値引額
+    値引率
+    小計
+}
+
+class 入金 {
+    入金ID
+    入金日
+    入金者名
+    入金額
+    銀行ID
+    購入ID
+}
+
+class 出荷 {
+    出荷ID
+    出荷日
+    担当者ID
+    購入ID
+}
+
+class 出荷明細 {
+    出荷ID
+    出荷明細ID
+    商品ID
+    数量
+}
+
+@enduml
+
+@startuml(id=stock)
+
+class 在庫 {
+    在庫ID
+    ロケーションID
+    商品ID
+    数量
+}
+
+class 出庫 {
+    出庫ID
+    商品ID
+    出庫日
+    出庫数
+}
+
+@enduml

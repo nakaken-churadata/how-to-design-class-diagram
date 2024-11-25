@@ -1,0 +1,50 @@
+@startuml
+!include_once model.pu!user
+!include_once model.pu!item
+!include_once model.pu!front
+!include_once model.pu!stock
+!include_once model.pu!company
+
+skinparam class {
+    backgroundColor<< トランザクション >> LightPink
+    backgroundColor<< ステート >> LightYellow
+}
+
+hide <<外部>> members
+
+class ユーザー <<外部>>
+remove ユーザー配達先
+remove ユーザークレジットカード
+class 商品マスタ <<外部>>
+remove 商品カテゴリマスタ
+class 購入 <<トランザクション>>
+class 購入明細 <<トランザクション>>
+class 在庫 <<ステート>>
+class 出庫 <<トランザクション>>
+class 入金 <<トランザクション>>
+class 入金明細 <<トランザクション>>
+class 社員マスタ <<外部>>
+class 出荷 <<トランザクション>>
+class 出荷明細 <<トランザクション>>
+
+購入 -right-> "1" ユーザー
+購入 "1" *-down- "0..n" 購入明細
+購入 "1" -right- "0..n" 入金
+購入明細 -right-> "1" 商品マスタ
+入金 "1" *-down- "0..n" 入金明細
+購入 "1" -right- "0..n" 出庫
+出庫 -right-> "1" 商品マスタ2
+出庫 -down- "1" 在庫
+在庫 -right-> "1" 商品マスタ3
+購入 "1" -right- "0..n" 出荷
+出荷 "1" *-down- "0..n" 出荷明細
+出荷 -right-> "1" 社員マスタ
+出荷明細 -right-> "1" 商品マスタ4
+
+購入 -right[hidden]- ユーザー
+ユーザー -right[hidden]- 入金
+入金 -right[hidden]->出庫
+出庫 -right[hidden]- 商品マスタ2
+商品マスタ2 -right[hidden]- 出荷
+
+@enduml
